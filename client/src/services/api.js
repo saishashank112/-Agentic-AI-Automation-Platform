@@ -36,28 +36,38 @@ api.interceptors.response.use(
 
       // 1. Auth Login / Register Fallback
       if (url.includes('/auth/login') || url.includes('/auth/register')) {
+        let body = {};
+        try { body = JSON.parse(error.config?.data || '{}'); } catch (_) {}
+        const email = body.email || 'operator@agentflow.ai';
+        const name = body.name || email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        const mockUser = {
+          _id: 'mock_usr_' + email.replace(/[^a-z0-9]/gi, '').slice(0, 12),
+          name,
+          email,
+          role: 'admin',
+        };
+        const token = 'mock_jwt_' + Date.now();
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('agentflow_mock_user', JSON.stringify(mockUser));
+        }
         return {
           data: {
             success: true,
-            data: {
-              user: {
-                _id: 'mock_usr_01',
-                name: 'Enterprise Operator',
-                email: 'operator@agentflow.ai',
-                role: 'admin',
-              },
-              token: 'mock_jwt_enterprise_token_' + Date.now(),
-            },
+            data: { user: mockUser, token },
           },
         };
       }
 
       // 2. Auth /me Fallback
       if (url.includes('/auth/me')) {
+        let storedUser = null;
+        if (typeof window !== 'undefined') {
+          try { storedUser = JSON.parse(localStorage.getItem('agentflow_mock_user')); } catch (_) {}
+        }
         return {
           data: {
             success: true,
-            data: {
+            data: storedUser || {
               _id: 'mock_usr_01',
               name: 'Enterprise Operator',
               email: 'operator@agentflow.ai',
