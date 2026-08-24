@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import '@xyflow/react/dist/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #090d16;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --bg-card-hover: rgba(30, 41, 59, 0.85);
+  --bg-input: rgba(9, 13, 22, 0.8);
+  --border-card: rgba(255, 255, 255, 0.08);
+  --border-card-hover: rgba(99, 102, 241, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-shadow-hover: 0 16px 40px 0 rgba(99, 102, 241, 0.2);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+html.light {
+  --bg-main: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.75);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-input: rgba(248, 250, 252, 0.85);
+  --border-card: rgba(226, 232, 240, 0.85);
+  --border-card-hover: rgba(99, 102, 241, 0.35);
+  --glass-shadow: 0 8px 30px -4px rgba(99, 102, 241, 0.06), 0 2px 8px -2px rgba(0, 0, 0, 0.03);
+  --glass-shadow-hover: 0 20px 35px -6px rgba(99, 102, 241, 0.15), 0 8px 16px -4px rgba(99, 102, 241, 0.08);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+}
+
+/* Base Body Styles with Ambient Mesh Glow */
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  background-color: #090d16;
+  color: #f8fafc;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode Mesh Background */
+html.light body {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.05) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+  color: #0f172a;
+}
+
+/* Landing Page Custom Glows & Keyframes */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+@keyframes beamFlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-dots-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+/* =========================================================================
+   LIGHT THEME ULTRA-PREMIUM GLASSMORPHISM SYSTEM
+   ========================================================================= */
+
+/* Sidebar Glassmorphism */
+html.light aside {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 4px 0 24px -2px rgba(99, 102, 241, 0.03) !important;
+}
+
+/* Header Frosted Glass */
+html.light header {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.03) !important;
+}
+
+/* Main Container Area */
+html.light main {
+  background-color: transparent !important;
+}
+
+/* Sidebar Navigation Items - Glass Hover & Active */
+html.light nav a {
+  color: #475569 !important;
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.light nav a:hover {
+  background: rgba(99, 102, 241, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  color: #4338ca !important;
+  border-color: rgba(99, 102, 241, 0.18) !important;
+  box-shadow: 0 4px 12px -2px rgba(99, 102, 241, 0.08) !important;
+  transform: translateX(3px);
+}
+
+/* Active Nav item with rich gradient */
+html.light nav a.bg-brand-600 {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.35) !important;
+}
+html.light nav a.bg-brand-600 svg {
+  color: #ffffff !important;
+}
+
+/* Cards & Panels - Translucent Pearl Glass */
+html.light .bg-dark-800 {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ULTRA-PREMIUM GLASS HOVER ON CARDS & TILES (NO FLAT SILVER) */
+html.light .bg-dark-800:hover,
+html.light div[class*="rounded-2xl"]:hover,
+html.light div[class*="rounded-xl border"]:hover {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(20px) !important;
+  border-color: rgba(99, 102, 241, 0.32) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* Secondary Background Containers / Inputs */
+html.light .bg-dark-900,
+html.light .bg-dark-900\/60,
+html.light .bg-dark-900\/70,
+html.light .bg-dark-900\/80 {
+  background: rgba(241, 245, 249, 0.7) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Hover on small buttons / chips / secondary actions (frosted glass sheen) */
+html.light .hover\:bg-dark-700:hover,
+html.light .hover\:bg-dark-600:hover {
+  background: rgba(99, 102, 241, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  color: #4338ca !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+html.light .hover\:border-dark-600:hover {
+  border-color: rgba(99, 102, 241, 0.35) !important;
+}
+
+/* Secondary Button Glass styling */
+html.light .bg-dark-700 {
+  background: rgba(241, 245, 249, 0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+  color: #334155 !important;
+}
+
+html.light .bg-dark-700:hover {
+  background: rgba(99, 102, 241, 0.09) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  color: #4338ca !important;
+  box-shadow: 0 4px 14px -2px rgba(99, 102, 241, 0.12) !important;
+}
+
+/* Primary Glass Glow Buttons */
+.bg-brand-600 {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.3) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.bg-brand-600:hover {
+  background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%) !important;
+  box-shadow: 0 8px 22px 0 rgba(79, 70, 229, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+/* Borders */
+html.light .border-dark-700 {
+  border-color: rgba(226, 232, 240, 0.85) !important;
+}
+html.light .border-dark-600 {
+  border-color: rgba(203, 213, 225, 0.9) !important;
+}
+
+/* Typography & Contrast */
+html.light .text-white {
+  color: #0f172a !important;
+}
+html.light .text-slate-100,
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Inputs & Form Controls */
+html.light input,
+html.light select,
+html.light textarea {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  border-color: rgba(203, 213, 225, 0.9) !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #6366f1 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Gradient Banners */
+html.light .bg-gradient-to-r.from-indigo-900\/60,
+html.light .bg-gradient-to-r.from-brand-700\/40,
+html.light .bg-gradient-to-r.from-brand-900\/40 {
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.9) 0%, rgba(245, 243, 255, 0.85) 50%, rgba(255, 255, 255, 0.95) 100%) !important;
+  border-color: rgba(199, 210, 254, 0.8) !important;
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.08) !important;
+}
+
+/* Badges / Chips */
+html.light .bg-slate-700 {
+  background: rgba(241, 245, 249, 0.9) !important;
+  color: #475569 !important;
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+}
+
+html.light .bg-dark-900.border-dark-700 {
+  background: rgba(248, 250, 252, 0.8) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+}
+
+/* Tables */
+html.light table thead {
+  background: rgba(241, 245, 249, 0.8) !important;
+  color: #334155 !important;
+  border-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+html.light table tbody tr {
+  transition: all 0.15s ease !important;
+}
+
+html.light table tbody tr:hover {
+  background: rgba(99, 102, 241, 0.04) !important;
+}
+
+/* React Flow Canvas in Light Mode */
+html.light .react-flow__node {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .react-flow__node:hover {
+  border-color: #6366f1 !important;
+  box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.2) !important;
+}
+
+html.light .react-flow__renderer {
+  background: #f8fafc !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-card);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+  backdrop-filter: blur(4px);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
