@@ -14,9 +14,11 @@ export default function WorkflowsIndex() {
     setLoading(true);
     try {
       const res = await api.get(`/workflows?search=${encodeURIComponent(search)}`);
-      setWorkflows(res.data.data || []);
+      const list = Array.isArray(res.data.data) ? res.data.data : (res.data.data?.workflows || []);
+      setWorkflows(list);
     } catch (err) {
       console.error('Failed to fetch workflows:', err.message);
+      setWorkflows([]);
     } finally {
       setLoading(false);
     }

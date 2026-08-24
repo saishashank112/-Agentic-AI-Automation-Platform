@@ -15,9 +15,11 @@ export default function ExecutionsIndex() {
     try {
       const url = statusFilter ? `/executions?status=${statusFilter}` : '/executions';
       const res = await api.get(url);
-      setExecutions(res.data.data || []);
+      const list = Array.isArray(res.data.data) ? res.data.data : (res.data.data?.executions || []);
+      setExecutions(list);
     } catch (err) {
       console.error('Failed to fetch executions:', err.message);
+      setExecutions([]);
     } finally {
       setLoading(false);
     }

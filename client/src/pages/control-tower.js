@@ -26,10 +26,14 @@ export default function ControlTower() {
         api.get('/approvals'),
         api.get('/policies'),
       ]);
-      setApprovals(appRes.data.data || []);
-      setPolicies(polRes.data.data || []);
+      const appList = Array.isArray(appRes.data.data) ? appRes.data.data : (appRes.data.data?.approvals || []);
+      const polList = Array.isArray(polRes.data.data) ? polRes.data.data : (polRes.data.data?.policies || []);
+      setApprovals(appList);
+      setPolicies(polList);
     } catch (err) {
       console.error(err);
+      setApprovals([]);
+      setPolicies([]);
     } finally {
       setLoading(false);
     }
